@@ -1,0 +1,20 @@
+name: Build DMG
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build app and package DMG
+        run: ./package.sh
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pomodoro
+          path: build/Pomodoro.dmg
